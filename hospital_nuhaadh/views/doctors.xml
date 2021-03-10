@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+<!--        <template id="products" name="Products">-->
+<!--            <t t-call="website.layout">-->
+<!--                Patients-->
+<!--                <t t-foreach="patients" t-as="pat">-->
+<!--                    <t t-esc="pat.patient_name"/>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--        </template>-->
+
+
+    <!--tree view of the appointment model-->
+    <record id="doctors_tree" model="ir.ui.view">
+        <field name="name">hospital.doctors.tree</field>
+        <field name="model">hospital.doctors</field>
+        <field name="arch" type="xml">
+            <tree string="Doctors">
+                <field name="name_seq"/>
+                <field name="doctors_name"/>
+                <field name="doctors_age"/>
+                <field name="contact_number"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--form view of the appointment model-->
+    <record id="doctors_form" model="ir.ui.view">
+        <field name="name">hospital.doctors.form</field>
+        <field name="model">hospital.doctors</field>
+        <field name="arch" type="xml">
+            <form string="doctors">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="doctors_name"/>
+                        </h1>
+                        <h2>
+                            <field name="specialized"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="doctors_age"/>
+                            <field name="gender"/>
+                            <field name="contact_number"/>
+                            <field name="address"/>
+                        </group>
+                        <group>
+                            <field name="user_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <button name="notify_success"
+                                    type="object"
+                                    string="Test success notification"
+                                    class="oe_highlight"/>
+                        </group>
+                        <group>
+                            <button name="notify_danger"
+                                    type="object"
+                                    string="Test danger notification"
+                                    class="oe_highlight"/>
+                        </group>
+                        <group>
+                            <button name="notify_warning"
+                                    type="object"
+                                    string="Test warning notification"
+                                    class="oe_highlight"/>
+                        </group>
+                        <group>
+                            <button name="notify_info"
+                                    type="object"
+                                    string="Test info notification"
+                                    class="oe_highlight"/>
+                        </group>
+                        <group>
+                            <button name="notify_default"
+                                    type="object"
+                                    string="Test default notification"
+                                    class="oe_highlight"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--action of the appointment menu-->
+    <record id="action_hospital_doctors" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.doctors</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{"active_test":False}</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_smiling_face">
+                Create your First Doctor !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hospital_doctors" name="Doctors" sequence="3" parent="hospital_root"
+              action="action_hospital_doctors"/>
+</odoo>

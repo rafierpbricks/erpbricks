@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="menu_patient_lists" model="website.menu">
+        <field name="name">Patients Listed Here</field>
+        <field name="url">/hospital/patients/</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">56</field>
+    </record>
+
+    <template id="patients_page" name="Hospital Patients">
+        <!--        below website.layout tag brings the ui of the odoo-->
+        <t t-call="website.layout">
+            <div class="container">
+                Hey its me
+                <table class="table table-border">
+                    <thead>
+                        <th>
+                            Name
+                        </th>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="patients" t-as="pat">
+                            <tr>
+                                <td>
+                                    <t t-esc="pat.patients_name"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+    <template id="web_get_patients" name="Hospital Patients">
+        <t t-call="website.layout">
+            <div calss="container">
+                Hey its me
+                <table class="table table-border">
+                    <thead>
+                        <tr>
+                            <td>
+                                Name
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="patient" t-as="patients">
+                            <tr>
+                                <t t-esc="patients.patients_name"/>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>
